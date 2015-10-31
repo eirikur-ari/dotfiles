@@ -1,3 +1,8 @@
+# Create a new directory and enter it
+function mkd() {
+  mkdir -p "$@" && cd "$_";
+}
+
 # Open man page as PDF (OS X Only)
 function manpdf() {
   man -t "${1}" | open -f -a /Applications/preview.app/
