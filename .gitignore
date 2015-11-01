@@ -1,0 +1,6 @@
+# OSX stuff
+.DS_Store
+Desktop.ini
+
+# Python
+*.pyc
