@@ -1,4 +1,3 @@
-# dotfiles
-My dotfiles 
+# My dotfiles 
 
 ## Work In Progress
