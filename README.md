@@ -1,3 +1,1 @@
-# My dotfiles 
-
-## Work In Progress
+# My dotfiles (Draft)
