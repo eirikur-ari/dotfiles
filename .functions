@@ -3,7 +3,24 @@ function mkd() {
   mkdir -p "$@" && cd "$_";
 }
 
-# Open man page as PDF (OS X Only)
-function manpdf() {
-  man -t "${1}" | open -f -a /Applications/preview.app/
+# Generate ssh key
+function ssh-key() {
+  local email=$(git config --global user.email) key=$1
+  if [ -z "$key" ]; then
+    echo "Please supply the name of the ssh key"
+  else
+    ssh-keygen -t rsa -b 4096 -C ${email} -N "" -f ~/.ssh/${key}
+    pbcopy <  ~/.ssh/${key}.pub
+  fi
 }
+
+case $(uname) in
+  'Darwing')
+
+    # Open man page as PDF (OS X Only)
+    function manpdf() {
+      man -t "${1}" | open -f -a /Applications/preview.app/
+    }
+
+  ;;
+esac
