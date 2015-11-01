@@ -5,33 +5,39 @@ for file in ~/.{bash_prompt,aliases}; do
 done
 unset file
 
-# bash completion.
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-    . `brew --prefix`/etc/bash_completion
-fi
+case $(uname) in
+  'Darwin')
 
-# Case-insensitive globbing (used in pathname expansion)
-shopt -s nocaseglob
+    # bash completion.
+    if [ -f `brew --prefix`/etc/bash_completion ]; then
+        . `brew --prefix`/etc/bash_completion
+    fi
 
-# Append to the Bash history file, rather than overwriting it
-shopt -s histappend;
+    # Case-insensitive globbing (used in pathname expansion)
+    shopt -s nocaseglob
 
-# Autocorrect typos in path names when using `cd`
-shopt -s cdspell;
+    # Append to the Bash history file, rather than overwriting it
+    shopt -s histappend;
 
-# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2)" scp sftp ssh
+    # Autocorrect typos in path names when using `cd`
+    shopt -s cdspell;
 
-# Add tab completion for `defaults read|write NSGlobalDomain`
-# You could just use `-g` instead, but I like being explicit
-complete -W "NSGlobalDomain" defaults
+    # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
+    [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2)" scp sftp ssh
 
-JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home
-export JAVA_HOME
-export PATH=$PATH:$JAVA_HOME/bin
+    # Add tab completion for `defaults read|write NSGlobalDomain`
+    # You could just use `-g` instead, but I like being explicit
+    complete -W "NSGlobalDomain" defaults
 
-# Google cloud util
-export PATH=${PATH}:$HOME/gsutil
+    JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home
+    export JAVA_HOME
+    export PATH=$PATH:$JAVA_HOME/bin
 
-# MySQL
-export PATH="${PATH}:/usr/local/mysql/bin"
+    # Google cloud util
+    export PATH=${PATH}:$HOME/gsutil
+
+    # MySQL
+    export PATH="${PATH}:/usr/local/mysql/bin"
+
+  ;;
+esac
