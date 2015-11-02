@@ -15,18 +15,20 @@ function ssh-key() {
 }
 
 case $(uname) in
-  'Darwing')
+  'Darwin')
 
     # Open man page as PDF (OS X Only)
     function manpdf() {
       man -t "${1}" | open -f -a /Applications/preview.app/
-    }
+    };
 
     # who is using the laptop's iSight camera?
+    # from Paul Irish, https://github.com/paulirish/dotfiles
     function camerausedby() {
       echo "Checking to see who is using the iSight camera… 📷"
       usedby=$(lsof | grep -w "AppleCamera\|USBVDC\|iSight" | awk '{printf $2"\n"}' | xargs ps)
       echo -e "Recent camera uses:\n$usedby"
-    }
+    };
+
   ;;
 esac
