@@ -24,7 +24,7 @@ function doBackup() {
   do
     if [[ -e ~/$dotfile && ! -L ~/$dotfile ]]; then
       # lets create a backup of existing file and replace it with a symlink
-      mv -v ~/$dotfile ~/$dotfile.bak;
+      mv -v ~/$dotfile ~/$backup_dir/$dotfile;
       ln -sfv "$my_dotfiles/$dotfile" ~;
     fi
   done
