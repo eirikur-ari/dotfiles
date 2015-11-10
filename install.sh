@@ -14,27 +14,25 @@ function gitMe() {
 
 # Move dotfiles to backup directory
 function doBackup() {
+  local backup_dir="dotfile_backup" dotfile="$1";
   #create backup folder if it does not exist
-  local backup_dir="dotfile_backup";
-  if [ ! -e ~/$backup_dir]; then
+  if [ ! -e ~/$backup_dir ]; then
     mkdir -pv ~/$backup_dir;
   fi
-
-  for dotfile in "${listOfFiles[@]}"
-  do
-    if [[ -e ~/$dotfile && ! -L ~/$dotfile ]]; then
-      # lets create a backup of existing file and replace it with a symlink
-      mv -v ~/$dotfile ~/$backup_dir/$dotfile;
-      ln -sfv "$my_dotfiles/$dotfile" ~;
-    fi
-  done
+    
+  # lets create a backup of existing file and replace it with a symlink
+  mv -v ~/$dotfile ~/$backup_dir/$dotfile;
+  ln -sfv "$my_dotfiles/$dotfile" ~;
 }
 
 # Create symlinks for my dotfiles
 function linkIt() {
   for dotfile in "${listOfFiles[@]}"
   do
-    if [[ ! -e ~/$dotfile && ! -L ~/$dotfile ]]; then 
+  	if [[ -e ~/$dotfile && ! -L ~/$dotfile ]]; then
+      # We might want to backup our stuff
+      doBackup $dotfile;
+    elif [[ ! -e ~/$dotfile && ! -L ~/$dotfile ]]; then 
 	  # create the symlink
 	  ln -sfv "$my_dotfiles/$dotfile" ~;
 	fi
@@ -44,9 +42,6 @@ function linkIt() {
 
 # Make sure we have the latest update
 gitMe;
-
-# We might want to backup our stuff
-doBackup;
 
 # install & activate
 linkIt;
