@@ -34,11 +34,7 @@ function doBackup() {
 function linkIt() {
   for dotfile in "${listOfFiles[@]}"
   do
-    if [[ -e ~/$dotfile && ! -L ~/$dotfile ]]; then
-      # lets create a backup of existing file and replace it with a symlink
-	  mv -v ~/$dotfile ~/$dotfile.bak;
-	  ln -sfv "$my_dotfiles/$dotfile" ~;
-    elif [[ ! -e ~/$dotfile && ! -L ~/$dotfile ]]; then 
+    if [[ ! -e ~/$dotfile && ! -L ~/$dotfile ]]; then 
 	  # create the symlink
 	  ln -sfv "$my_dotfiles/$dotfile" ~;
 	fi
@@ -48,6 +44,9 @@ function linkIt() {
 
 # Make sure we have the latest update
 gitMe;
+
+# We might want to backup our stuff
+doBackup
 
 # install & activate
 linkIt;
