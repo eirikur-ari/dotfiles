@@ -46,7 +46,7 @@ function linkIt() {
 gitMe;
 
 # We might want to backup our stuff
-doBackup
+doBackup;
 
 # install & activate
 linkIt;
