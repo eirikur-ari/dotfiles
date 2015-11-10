@@ -54,3 +54,6 @@ set ruler
 set showmode
 " Show the filename in the window titlebar
 set title
+
+" Save a file as root (,W)
+noremap <leader>W :w !sudo tee % > /dev/null<CR>
