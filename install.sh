@@ -39,13 +39,16 @@ function linkIt() {
   done
 }
 
+# Runs the installation
+function runMe() {
+  # Make sure we have the latest update
+  gitMe;
 
-# Make sure we have the latest update
-gitMe;
+  # install & activate
+  linkIt;
+  source ~/.bashrc; 
+}
 
-# install & activate
-linkIt;
-source ~/.bashrc;
-
-# Cleanup
-unset my_dotfiles my_git listOfFiles gitMe doBackup linkIt;
+# Install and Cleanup
+runMe;
+unset my_dotfiles my_git listOfFiles runMe;
