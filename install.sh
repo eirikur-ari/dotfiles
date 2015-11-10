@@ -16,7 +16,7 @@ function gitMe() {
 function doBackup() {
   #create backup folder if it does not exist
   local backup_dir="dotfile_backup";
-  if [ -e ~/$backup_dir]; then
+  if [ ! -e ~/$backup_dir]; then
     mkdir -pv ~/$backup_dir;
   fi
 
