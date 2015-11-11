@@ -1,1 +1,4 @@
 set completion-ignore-case on
+
+# SSH host autocompletion
+complete -W "`awk '{ print $2 }' /etc/hosts`" ssh
