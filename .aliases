@@ -64,3 +64,5 @@ alias reload="exec $SHELL -l"
 
 # Color Cat
 alias ccat="pygmentize -g"
+
+alias quit=exit
