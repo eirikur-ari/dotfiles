@@ -34,8 +34,8 @@ case $(uname) in
   'Darwin')
 
     # bash completion.
-    if [ -f `brew --prefix`/etc/bash_completion ]; then
-        . `brew --prefix`/etc/bash_completion
+    if [ -f $(brew --prefix)/etc/bash_completion ]; then
+      . $(brew --prefix)/etc/bash_completion
     fi
 
     # Add tab completion for `defaults read|write NSGlobalDomain`
