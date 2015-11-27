@@ -5,7 +5,7 @@ my_dotfiles="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
 my_git=" git --work-tree="$my_dotfiles" --git-dir="$my_dotfiles/.git" ";
 
 # List of dotfiles that we want to link to users home directory
-declare -a listOfFiles=("git/.gitignore_global" "git/.gitconfig" "bash/.bashrc" "bash/.bash_profile" "bash/.bash_prompt" "others/.aliases" "others/.functions" "others/.exports" "others/.inputrc" "others/.wgetrc");
+declare -a listOfFiles=("git/.gitignore_global" "git/.gitconfig" "bash/.bashrc" "bash/.bash_profile" "bash/.bash_prompt" "others/.aliases" "others/.functions" "others/.exports" "others/.inputrc" "others/.wgetrc" "vim/.vimrc" "vim/.vim");
 
 # Update my git repo and submodules
 function gitMe() {
