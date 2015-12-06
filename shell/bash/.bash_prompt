@@ -1,5 +1,3 @@
-#!/bin/bash
-
 if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
 	export TERM=gnome-256color
 elif infocmp xterm-256color >/dev/null 2>&1; then
@@ -39,8 +37,17 @@ else
 	magenta="\e[1;35m";
 fi
 
+# Handle domain user
+if [[ ${USER} == *"@"* ]]; then
+  IFS='@' read -a domainuser <<< "${USER}"; 
+  username=${domainuser[0]};
+	hostname=${domainuser[1]};
+else
+  username=${USER};
+	hostname=${HOSTNAME};
+fi
 
-function git_info() {
+function gitInfo() {
 	# check if we're in a git repo
 	git rev-parse --is-inside-work-tree &>/dev/null || return
 
@@ -54,27 +61,36 @@ function git_info() {
 }
 
 # Highlight the user name when logged in as root.
-if [[ "${USER}" == "root" ]]; then
-  username="${red}";
-else
- 	username="${violet}";
-fi;
+function myUser() {
+  if [[ "${USER}" == "root" ]]; then
+    echo "\[${red}\]\u";
+  else
+    echo "\[${violet}\]${username}";
+  fi;
+}
 
 # Highlight the hostname when connected via SSH.
-if [[ "${SSH_TTY}" ]]; then
-  hostname="${bold}${red}";
-else
-  hostname="${orange}";
-fi;
+function myHost() {
+  if [[ "${SSH_TTY}" ]]; then
+    echo "\[${red}\]\h";
+  else
+    echo "\[${orange}\]${hostname}";
+  fi;
+}
 
 # Set the prompt string.
-PS1="\[\033]0;\w\007\]";                                 # terminal title (set to the current working directory)
-PS1+="\[${bold}\]";                                      # newline
-PS1+="\[${username}\]\u";                                # username
-PS1+="\[${white}\] at ";                                 # at
-PS1+="\[${hostname}\]\h";                                # hostname
-PS1+="\[${white}\] in ";                                 # in
-PS1+="\[${green}\]\w";                                   # working directory
-PS1+="\$(git_info)";                                     # Git repository info
-PS1+="\n";                                               # newline
-PS1+="\[${white}\]\$ \[${reset}\]";                      # Reset color
+function promptString() {
+  PS1="\[\033]0;\w\007\]";                                 # terminal title (set to the current working directory)
+  PS1+="\[${bold}\]";                                      # display prompt string in bold  
+  PS1+="$(myUser)";                                        # username
+  PS1+="\[${white}\] at ";                                 # at                                
+  PS1+="$(myHost)";                                        # hostname
+  PS1+="\[${white}\] in ";                                 # in
+  PS1+="\[${green}\]\w";                                   # working directory
+  PS1+="\$(gitInfo)";                                      # Git repository info
+  PS1+="\n";                                               # newline
+  PS1+="\[${white}\]\$ \[${reset}\]";                      # Add $ character and reset the color
+}
+
+promptString;
+unset promptString;
