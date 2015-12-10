@@ -2,7 +2,7 @@
 
 # Let's get the full path where the script and git repository are located
 my_dotfiles="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
-my_git=" git --work-tree="$my_dotfiles" --git-dir="$my_dotfiles/.git" ";
+my_git=" git --work-tree=$my_dotfiles --git-dir=$my_dotfiles/.git ";
 
 # List of dotfiles that we want to link to users home directory
 declare -a listOfFiles=("tools/git/.gitignore_global" "tools/git/.gitconfig" "shell/bash/.bashrc" "shell/bash/.bash_profile" "shell/bash/.bash_prompt" "system/.aliases" "system/.functions" "system/.exports" "system/.inputrc" "tools/.wgetrc" "tools/vim/.vimrc" "tools/vim/.vim");
@@ -21,7 +21,7 @@ function doBackup() {
   fi
     
   # lets create a backup of existing file and replace it with a symlink
-  mv -v ~/$dotfile ~/$backup_dir/$dotfile;
+  mv -v ~/"$dotfile" ~/"$backup_dir"/"$dotfile";
 }
 
 # Create symlinks for my dotfiles
@@ -30,7 +30,7 @@ function linkIt() {
   do
     if [[ -e ~/$dotfile && ! -L ~/$dotfile ]]; then
       # We might want to backup our stuff
-      doBackup $dotfile;
+      doBackup "$dotfile";
     fi
     
     # create the symlink
