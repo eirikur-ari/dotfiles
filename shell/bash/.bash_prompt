@@ -52,12 +52,29 @@ function gitInfo() {
 	git rev-parse --is-inside-work-tree &>/dev/null || return
 
 	# quickest check for what branch we're on
-	branch=$(git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||')
+	branch=$(git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||');
 
 	# check if it's dirty (via github.com/sindresorhus/pure)
-	dirty=$(git diff --quiet --ignore-submodules HEAD &>/dev/null; [ $? -eq 1 ]&& echo -e "*")
+	dirty=$(git diff --quiet --ignore-submodules HEAD &>/dev/null; [ $? -eq 1 ]&& echo -e "[ dirty ]");
 
-	echo $white" on "$purple$branch$dirty
+	echo "${white}" on "${purple}${branch} ${yellow}${dirty}";
+}
+
+function svnInfo() {
+  # check if we're in a svn repo
+  svn info &> /dev/null || return
+
+  # check for what branch we're on
+  branch=$(svn info | grep '^URL:' | egrep -o '((tags|branches)/[^/]+|trunk)*' | sed -E -e 's/^(branches|tags)\///g');
+  
+  # check if it's dirty
+  changes=$(svn status | grep "?\|\!\|M\|A" | wc -l);
+  
+  if [ $changes -gt 0 ]; then 
+  	dirty=$(echo -e "[ dirty ]");
+  fi
+
+  echo "${white}" on "${purple}${branch} ${yellow}${dirty}";
 }
 
 # Highlight the user name when logged in as root.
@@ -88,6 +105,7 @@ function promptString() {
   PS1+="\[${white}\] in ";                                 # in
   PS1+="\[${green}\]\w";                                   # working directory
   PS1+="\$(gitInfo)";                                      # Git repository info
+  PS1+="\$(svnInfo)";                                      # Subversion repository info
   PS1+="\n";                                               # newline
   PS1+="\[${white}\]\$ \[${reset}\]";                      # Add $ character and reset the color
 }
