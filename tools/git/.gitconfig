@@ -1,6 +1,6 @@
 [user]
-	name = Eirikur Ari Petursson
-        email = eirikur.ari@hotmail.com
+	    name = Eirikur Ari Petursson
+      email = eirikur.ari@hotmail.com
 [core]
        excludefile = ~/.gitignore_global
        editor = vim
@@ -26,6 +26,7 @@
 [push]
        default = simple
 [merge]
-       log = true
+			 log = true
+       tool = diffmerge
 [grep]
        lineNumber = 1 # enables prefix line number to matching lines
