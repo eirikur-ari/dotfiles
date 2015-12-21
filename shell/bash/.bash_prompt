@@ -55,9 +55,9 @@ function gitInfo() {
 	branch=$(git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||');
 
 	# check if it's dirty (via github.com/sindresorhus/pure)
-	dirty=$(git diff --quiet --ignore-submodules HEAD &>/dev/null; [ $? -eq 1 ]&& echo -e "[ dirty ]");
+	dirty=$(git diff --quiet --ignore-submodules HEAD &>/dev/null; [ $? -eq 1 ]&& echo -e "*");
 
-	echo "${white}" on "${purple}${branch} ${yellow}${dirty}";
+	echo "${white}" on "${purple}${branch}${yellow}${dirty}";
 }
 
 function svnInfo() {
@@ -71,10 +71,10 @@ function svnInfo() {
   changes=$(svn status | grep "?\|\!\|M\|A" | wc -l);
   
   if [ $changes -gt 0 ]; then 
-  	dirty=$(echo -e "[ dirty ]");
+  	dirty=$(echo -e "*");
   fi
 
-  echo "${white}" on "${purple}${branch} ${yellow}${dirty}";
+  echo "${white}" on "${purple}${branch}${yellow}${dirty}";
 }
 
 # Highlight the user name when logged in as root.
