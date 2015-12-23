@@ -1,3 +1,15 @@
 [submodule "tools/vim/.vim/bundle/vim-colors-solarized"]
 	path = tools/vim/.vim/bundle/vim-colors-solarized
 	url = git@github.com:altercation/vim-colors-solarized.git
+[submodule "tools/vim/.vim/bundle/bats.vim"]
+	path = tools/vim/.vim/bundle/bats.vim
+	url = git@github.com:vim-scripts/bats.vim.git
+[submodule "tools/vim/.vim/bundle/molokai"]
+	path = tools/vim/.vim/bundle/molokai
+	url = git@github.com:vim-scripts/molokai.git
+[submodule "tools/vim/.vim/bundle/groovy.vim"]
+	path = tools/vim/.vim/bundle/groovy.vim
+	url = git@github.com:vim-scripts/groovy.vim.git
+[submodule "tools/vim/.vim/bundle/vim-gradle"]
+	path = tools/vim/.vim/bundle/vim-gradle
+	url = git@github.com:vim-scripts/vim-gradle.git
