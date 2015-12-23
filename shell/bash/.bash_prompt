@@ -103,7 +103,7 @@ function promptString() {
   PS1+="\[${white}\] at ";                                 # at                                
   PS1+="$(myHost)";                                        # hostname
   PS1+="\[${white}\] in ";                                 # in
-  PS1+="\[${green}\]\w";                                   # working directory
+  PS1+="\[${green}\]\W";                                   # current directory
   PS1+="\$(gitInfo)";                                      # Git repository info
   PS1+="\$(svnInfo)";                                      # Subversion repository info
   PS1+="\n";                                               # newline
