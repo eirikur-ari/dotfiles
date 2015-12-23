@@ -16,7 +16,7 @@
 # password-stores = keychain
 # password-stores = windows-cryptoapi
 #else
-password-stores = gnome-keyring
+# password-stores = gnome-keyring
 ###
 ### Set KWallet wallet used by Subversion. If empty or unset,
 ### then the default network wallet will be used.
