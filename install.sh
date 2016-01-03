@@ -2,14 +2,12 @@
 
 # Let's get the full path where the script and git repository are located
 my_dotfiles="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
-my_git=" git --work-tree=$my_dotfiles --git-dir=$my_dotfiles/.git ";
 
-# List of dotfiles that we want to link to users home directory
-declare -a listOfFiles=("tools/git/.gitignore_global" "tools/git/.gitconfig" "shell/bash/.bashrc" "shell/bash/.bash_profile" "shell/bash/.bash_prompt" "system/.aliases" "system/.functions" "system/.exports" "system/.inputrc" "tools/wget/.wgetrc" "tools/vim/.vimrc" "tools/vim/.vim");
 
 # Update my git repo and submodules
-function gitMe() {
-  [ -d "$my_dotfiles/.git" ] && ${my_git} pull origin master && ${my_git} submodule update;
+function update() {
+  local my_git=" git --work-tree=$my_dotfiles --git-dir=$my_dotfiles/.git ";
+  [ -d "$my_dotfiles/.git" ] && ${my_git} pull origin master && ${my_git} submodule init && ${my_git} submodule update;
 }
 
 # Move dotfiles to backup directory
@@ -25,29 +23,46 @@ function doBackup() {
 }
 
 # Create symlinks for my dotfiles
-function linkIt() {
-  for dotfile in "${listOfFiles[@]}"
-  do
+function symlink() {
+  declare -a targets=("${!1}");  # Array of targets
+  local linkname="$2";           # Name of the linked file
+  
+  for dotfile in "${targets[@]}"
+  do    
     if [[ -e ~/$dotfile && ! -L ~/$dotfile ]]; then
       # We might want to backup our stuff
       doBackup "$dotfile";
     fi
     
     # create the symlink
-    ln -sfv "$my_dotfiles/$dotfile" ~;
+    ln -sfv "$my_dotfiles/$dotfile" "$linkname";
   done
 }
 
 # Runs the installation
-function runMe() {
+function main() {
+   # List of dotfiles that we want to link to users home directory
+  local dotfiles=("tools/git/.gitignore_global" "tools/git/.gitconfig" "shell/bash/.bashrc" "shell/bash/.bash_profile" \
+  "shell/bash/.bash_prompt" "system/.aliases" "system/.functions" "system/.exports" "system/.inputrc" "tools/wget/.wgetrc" \
+  "tools/vim/.vimrc" "tools/vim/.vim");  
+  local svnfiles=("tools/subversion/config" "tools/subversion/servers");
+  local configfiles=("tools/terminator");
+
   # Make sure we have the latest update
-  gitMe;
+  update;
 
   # install & activate
-  linkIt;
+  printf "Creating symlinks for .files\n"
+  symlink dotfiles[@] ~;
+
+  printf "Creating symlinks for .subversion\n"
+  symlink svnfiles[@] ~/.subversion;
+  
+  printf "Creating symlinks for .config\n"
+  symlink configfiles[@] ~/.config/;
+
   source ~/.bashrc; 
 }
 
-# Install and Cleanup
-runMe;
-unset my_dotfiles my_git listOfFiles runMe;
+main;                   # Execute program
+unset my_dotfiles main; # Cleanup
