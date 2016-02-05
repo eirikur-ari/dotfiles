@@ -6,17 +6,17 @@ syntax on
 filetype plugin indent on
 
 " Color Config
-" let g:solarized_termcolors=256
-" set background=dark
-" colorscheme solarized
-" let g:solarized_termtrans=1
-colorscheme molokai
-let g:rehash256 = 1
+let g:solarized_termcolors=256
+set background=dark
+colorscheme solarized
+let g:solarized_termtrans=1
+" colorscheme molokai
+" let g:rehash256 = 1
 
 " Make Vim more useful
 set nocompatible
 " Copy indent from last line when starting new line
-set autoindent
+" set autoindent
 " Allow backspace in insert mode
 set backspace=indent,eol,start
 " Highlight current line
