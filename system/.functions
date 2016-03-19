@@ -4,13 +4,15 @@ function mkd() {
 }
 
 # Generate ssh key
-function ssh-key() {
-  local email=$(git config --global user.email) key=$1
+function ssh-generate-key() {
+  local email="" key="$1";
+	email=$(git config --global user.email);
+
   if [ -z "$key" ]; then
-    echo "Please supply the name of the ssh key"
+    echo "Please supply name of the ssh key";
   else
-    ssh-keygen -t rsa -b 4096 -C ${email} -N "" -f ~/.ssh/${key}
-    pbcopy <  ~/.ssh/${key}.pub
+    ssh-keygen -t rsa -b 4096 -C "$email" -N "" -f ~/.ssh/"$key";
+    pbcopy <  ~/.ssh/"$key".pub
   fi
 }
 
@@ -30,11 +32,11 @@ function server() {
            
 # Copy w/ progress
 cp_p () {
-  rsync -WavP --human-readable --progress $1 $2
+  rsync -WavP --human-readable --progress "$1" "$2";
 }
 
 # `tre` is a shorthand for `tree` with hidden files and color enabled, ignoring
-# the `.git` directory, listing directories first. The output gets piped into
+# some directories, listing directories first. The output gets piped into
 # `less` with options to preserve color and line numbers, unless the output is
 # small enough for one screen.
 function tre() {
@@ -42,15 +44,37 @@ function tre() {
 }
   
 function digs() {
-  dig -t $1 $2 +short
+  dig -t "$1" "$2" +short;
 }
 
+# Delete all containers
+function docker-clean-all-containers {
+  local containers="";
+	containers="$(docker ps -a -q)";
+  [ ! -z "$containers" ] && docker rm "$containers";
+	[ -z "$containers" ] && echo "No containers to clean!";
+}
+
+# Delete all images
+function docker-clean-all-images {
+  local images="";
+	images="$(docker images -q)";
+  [ ! -z "$images" ] && docker rmi "$images";
+	[ -z "$images" ] && echo "No images to clean!";
+}
+
+function docker-clean-all {
+  docker-clean-all-containers;
+	docker-clean-all-images;
+}
+
+# Switch between platforms
 case $(uname) in
   'Darwin')
 
     # Open man page as PDF (OS X Only)
     function manpdf() {
-      man -t "${1}" | open -f -a /Applications/preview.app/
-    };
+      man -t "$1" | open -f -a /Applications/preview.app/;
+    }
   ;;
 esac

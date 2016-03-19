@@ -75,7 +75,4 @@ alias reload="exec $SHELL -l"
 # Color Cat
 alias ccat="pygmentize -g"
 
-# Remove old docker containers
-alias docker-cleanup="docker ps -a | grep 'weeks ago' | awk '{print $1}' | xargs --no-run-if-empty docker rm"
-
 alias quit=exit
