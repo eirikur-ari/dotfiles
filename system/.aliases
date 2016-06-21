@@ -76,3 +76,5 @@ alias reload="exec $SHELL -l"
 alias ccat="pygmentize -g"
 
 alias quit=exit
+
+alias df="df -Th --total"

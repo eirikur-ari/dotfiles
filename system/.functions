@@ -21,16 +21,6 @@ function calc() {
   echo "$*" | bc -l;
 }
 
-# Start an HTTP server from a directory, optionally specifying the port
-function server() {
-  local port="${1:-8000}";
-  sleep 1 && open "http://localhost:${port}/" &
-  # Set the default Content-Type to `text/plain` instead of `application/octet-stream`
-  # And serve everything as UTF-8 (although not technically correct, this doesn’t break anything for binary files)
-  python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port";
-}
-           
-# Copy w/ progress
 cp_p () {
   rsync -WavP --human-readable --progress "$1" "$2";
 }
@@ -47,25 +37,34 @@ function digs() {
   dig -t "$1" "$2" +short;
 }
 
-# Delete all containers
-function docker-clean-all-containers {
+# Removes all containers
+function docker-remove-containers {
   local containers="";
 	containers="$(docker ps -a -q)";
   [ ! -z "$containers" ] && docker rm "$containers";
 	[ -z "$containers" ] && echo "No containers to clean!";
 }
 
-# Delete all images
-function docker-clean-all-images {
+# Removes all images
+function docker-remove-images {
   local images="";
 	images="$(docker images -q)";
   [ ! -z "$images" ] && docker rmi "$images";
 	[ -z "$images" ] && echo "No images to clean!";
 }
 
-function docker-clean-all {
+# Removes all docker container and images
+function docker-spring-clean {
   docker-clean-all-containers;
 	docker-clean-all-images;
+}
+
+# Removes all dangling docker images
+function docker-remove-dangling {
+  local danglers="";
+  danglers="$(docker images -f 'dangling=true' -q)";
+  [ ! -z "$danglers" ] && docker rmi "$danglers";
+  [ -z "$danglers" ] && echo "No dangling images!"
 }
 
 # Switch between platforms
