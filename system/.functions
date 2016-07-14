@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Create a new directory and enter it
 function mkd() {
   mkdir -p "$@" && cd "$_";
@@ -65,6 +66,17 @@ function docker-remove-dangling {
   danglers="$(docker images -f 'dangling=true' -q)";
   [ ! -z "$danglers" ] && docker rmi "$danglers";
   [ -z "$danglers" ] && echo "No dangling images!"
+}
+
+# Does simple port check through tcp
+function portCheck() {
+  local host="$1" port="$2";
+	(echo >/dev/tcp/${host}/${port}) &> /dev/null;
+  if [ $? != 0 ]; then
+    echo "The port ${white}${port}${reset} is ${red}closed${reset} on ${white}${host}${reset}";
+  else
+    echo "The port ${white}${port}${reset} is ${green}open${reset} on the host ${white}${host}${reset}";
+  fi
 }
 
 # Switch between platforms
