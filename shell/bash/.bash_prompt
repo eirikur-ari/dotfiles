@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
 	export TERM=gnome-256color
 elif infocmp xterm-256color >/dev/null 2>&1; then
@@ -41,10 +42,12 @@ fi
 if [[ ${USER} == *"@"* ]]; then
   IFS='@' read -a domainuser <<< "${USER}"; 
   username=${domainuser[0]};
-	hostname=${domainuser[1]};
+	domain=${domainuser[1]};
+	#hostname=${domainuser[1]};
 else
   username=${USER};
-	hostname=${HOSTNAME};
+	domain="local"
+	#hostname=${HOSTNAME};
 fi
 
 function gitInfo() {
@@ -91,14 +94,19 @@ function myHost() {
   if [[ "${SSH_TTY}" ]]; then
     echo "\[${red}\]\h";
   else
-    echo "\[${orange}\]${hostname}";
+    echo "\[${orange}\]\h";
   fi;
+}
+
+function myDomain() {
+	echo "${white}[${blue}${domain}${white}] ";
 }
 
 # Set the prompt string.
 function promptString() {
   PS1="\[\033]0;\w\007\]";                                 # terminal title (set to the current working directory)
-  PS1+="\[${bold}\]";                                      # display prompt string in bold  
+  PS1+="\[${bold}\]";                                      # display prompt string in bold
+	PS1+="\$(myDomain)";
   PS1+="$(myUser)";                                        # username
   PS1+="\[${white}\] at ";                                 # at                                
   PS1+="$(myHost)";                                        # hostname
