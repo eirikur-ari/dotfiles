@@ -13,3 +13,6 @@
 [submodule "tools/vim/.vim/bundle/vim-gradle"]
 	path = tools/vim/.vim/bundle/vim-gradle
 	url = git@github.com:vim-scripts/vim-gradle.git
+[submodule "tools/vim/.vim/bundle/puppet"]
+	path = tools/vim/.vim/bundle/puppet
+	url = git://github.com/rodjek/vim-puppet.git
