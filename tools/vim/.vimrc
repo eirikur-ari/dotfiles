@@ -5,18 +5,15 @@ syntax on
 
 filetype plugin indent on
 
-" Color Config
-" let g:solarized_termcolors=256
-" set background=dark
-" colorscheme solarized
-" let g:solarized_termtrans=1
+" Set theme
 colorscheme molokai
 let g:rehash256 = 1
 
 " Make Vim more useful
 set nocompatible
+
 " Copy indent from last line when starting new line
-" set autoindent
+set autoindent
 " Allow backspace in insert mode
 set backspace=indent,eol,start
 " Highlight current line
@@ -33,8 +30,8 @@ set secure
 set encoding=utf-8 nobomb
 " Don’t add empty newlines at the end of files
 set binary
-" Make tabs as wide as two spaces
-set tabstop=2
+" Make tabs as wide as one space
+set tabstop=1	
 " Highlight searches
 set hlsearch
 " Ignore case of searches

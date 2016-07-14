@@ -106,7 +106,7 @@ function myDomain() {
 function promptString() {
   PS1="\[\033]0;\w\007\]";                                 # terminal title (set to the current working directory)
   PS1+="\[${bold}\]";                                      # display prompt string in bold
-	PS1+="\$(myDomain)";
+	PS1+="\$(myDomain)";                                     # domain
   PS1+="$(myUser)";                                        # username
   PS1+="\[${white}\] at ";                                 # at                                
   PS1+="$(myHost)";                                        # hostname
