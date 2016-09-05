@@ -1,32 +1,32 @@
 [user]
-	    name = Eirikur Ari Petursson
-      email = eirikur.ari@hotmail.com
+  name = Eirikur Ari Petursson
+  email = eirikur.ari@hotmail.com
 [core]
-       excludefile = ~/.gitignore_global
-       editor = vim
+  excludefile = ~/.gitignore_global
+  editor = vim
 [color]
-       ui = auto
+  ui = auto
 [color "branch"]
-       current = yellow reverse
-       local = yellow
-       remote = green
+  current = yellow reverse
+  local = yellow
+  remote = green
 [color "diff"]
-       meta = yellow bold
-       frag = magenta bold
-       old = red bold
-       new = green bold
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
 [color "status"]
-       added = yellow
-       changed = green
-       untracked = cyan
+  added = yellow
+  changed = green
+  untracked = cyan
 [diff]
-       renames = copies # detect copies as well as renames
+  renames = copies # detect copies as well as renames
 [diff "bin"]
-       textconv = hexdump -v -C # use 'hexdump' to diff binary files
+  textconv = hexdump -v -C # use 'hexdump' to diff binary files
 [push]
-       default = simple
+  default = simple
 [merge]
-			 log = true
-       tool = diffmerge
+  log = true
+  tool = diffmerge
 [grep]
-       lineNumber = 1 # enables prefix line number to matching lines
+  lineNumber = 1 # enables prefix line number to matching lines

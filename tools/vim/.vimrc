@@ -55,3 +55,6 @@ set title
 
 " Save a file as root (,W)
 noremap <leader>W :w !sudo tee % > /dev/null<CR>
+
+" Force n column wrapping when in a git commmit
+au FileType gitcommit set tw=72
