@@ -34,8 +34,12 @@ set secure
 set encoding=utf-8 nobomb
 " Don’t add empty newlines at the end of files
 set binary
-" Make tabs as wide as one space
-set tabstop=1	
+" Insert space characters whenever the tab key is pressed
+set expandtab
+" Make tabs as wide as two space
+set tabstop=2
+" Space characters inserted for indentation
+set shiftwidth=2
 " Highlight searches
 set hlsearch
 " Ignore case of searches
