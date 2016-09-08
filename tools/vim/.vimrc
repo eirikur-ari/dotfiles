@@ -9,6 +9,10 @@ filetype plugin indent on
 colorscheme molokai
 let g:rehash256 = 1
 
+" Add Airline theme & enable powerline
+let g:airline_theme='molokai'
+let g:airline_powerline_fonts = 1
+
 " Make Vim more useful
 set nocompatible
 
