@@ -33,7 +33,9 @@ cp_p () {
 function tre() {
   tree -aC -I '.git|node_modules|bower_components|.gradle|.idea|.svn|.sass-cache' --dirsfirst "$@" | less -FRNX;
 }
-  
+
+# Param1: record type
+# Param2: dns record
 function digs() {
   dig -t "$1" "$2" +short;
 }
