@@ -66,3 +66,9 @@ noremap <leader>W :w !sudo tee % > /dev/null<CR>
 
 " Force n column wrapping when in a git commmit
 au FileType gitcommit set tw=72
+
+" Normal Copy/Paste
+nmap <C-V> "+gP
+nmap <C-V> "+gP 
+imap <C-V> <ESC><C-V>i 
+vmap <C-C> "+y

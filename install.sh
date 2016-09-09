@@ -44,7 +44,7 @@ function main() {
    # List of dotfiles that we want to link to users home directory
   local dotfiles=("tools/git/.gitignore_global" "tools/git/.gitconfig" "shell/bash/.bashrc" "shell/bash/.bash_profile" \
   "shell/bash/.bash_prompt" "system/.aliases" "system/.functions" "system/.exports" "system/.inputrc" "tools/wget/.wgetrc" \
-  "tools/vim/.vimrc" "tools/vim/.vim");  
+  "tools/vim/.vimrc" "tools/vim/.vim" "tools/gvim/.gvimrc");  
   local svnfiles=("tools/subversion/config" "tools/subversion/servers");
   local configfiles=("tools/terminator");
 
