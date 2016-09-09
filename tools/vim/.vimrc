@@ -68,7 +68,9 @@ noremap <leader>W :w !sudo tee % > /dev/null<CR>
 au FileType gitcommit set tw=72
 
 " Normal Copy/Paste
+" ctrl-v is paste
 nmap <C-V> "+gP
-nmap <C-V> "+gP 
-imap <C-V> <ESC><C-V>i 
-vmap <C-C> "+y
+" Ctrl-c is copy
+vmap <C-C> "+y:
+" Ctrl-x is cut
+vnoremap <C-X> "+x
