@@ -39,6 +39,20 @@ function symlink() {
   done
 }
 
+# Creates a dotfile with config.
+function addConfig() {
+  local dotfile="$1" config="$2";
+
+  if [ ! -e "$dotfile" ]; then
+    # Create the file
+    printf "Created the dotfile %s\n" "$dotfile";
+    touch "$dotfile";
+    # Add config to the file
+    printf "The config: '%s' added to the file: %s\n" "$config" "$dotfile";
+    echo -n "$config" > "$dotfile";
+  fi
+}
+
 # Runs the installation
 function main() {
    # List of dotfiles that we want to link to users home directory
@@ -61,6 +75,7 @@ function main() {
   printf "Creating symlinks for .config\n"
   symlink configfiles[@] ~/.config/;
 
+  addConfig ~/.extra "export DOTFILES_HOME=$my_dotfiles";
   source ~/.bashrc; 
 }
 
