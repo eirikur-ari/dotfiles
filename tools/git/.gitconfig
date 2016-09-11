@@ -3,7 +3,7 @@
   email = eirikur.ari@hotmail.com
 [core]
   excludefile = ~/.gitignore_global
-  editor = vim
+  editor = gvim --nofork
 [color]
   ui = auto
 [color "branch"]
