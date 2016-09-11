@@ -14,10 +14,10 @@ load "${DOTFILES_HOME}/system/.functions"
     [ "$actual" -eq "$expected" ]
 }
 
-@test "Verify that record type 'A' on localhost is 127.0.0.1" {
-  run digs A localhost
+@test "Verify that record type 'A' on www.mbl.is is 92.43.192.110" {
+  run digs A www.mbl.is
   [ "$status" -eq 0 ]
-  [ "$output" = "127.0.0.1" ]
+  [ "$output" = "92.43.192.110" ]
 }
 
 case $(uname) in
