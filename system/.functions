@@ -6,8 +6,12 @@ function mkd() {
 
 # Generate ssh key
 function ssh-generate-key() {
-  local email="" key="$1";
-	email=$(git config --global user.email);
+  local email="$2" key="$1";
+ 
+  # Use git global config if email value is empty
+  if [ -z "$email" ]; then
+	  email=$(git config --global user.email);
+  fi
 
   if [ -z "$key" ]; then
     echo "Please supply name of the ssh key";
@@ -70,16 +74,7 @@ function docker-remove-dangling {
   [ -z "$danglers" ] && echo "No dangling images!"
 }
 
-# Does simple port check through tcp
-function portCheck() {
-  local host="$1" port="$2";
-	(echo >/dev/tcp/${host}/${port}) &> /dev/null;
-  if [ $? != 0 ]; then
-    echo "The port ${white}${port}${reset} is ${red}closed${reset} on ${white}${host}${reset}";
-  else
-    echo "The port ${white}${port}${reset} is ${green}open${reset} on the host ${white}${host}${reset}";
-  fi
-}
+
 
 # Switch between platforms
 case $(uname) in
@@ -89,5 +84,18 @@ case $(uname) in
     function manpdf() {
       man -t "$1" | open -f -a /Applications/preview.app/;
     }
+  ;;
+  'Linux')
+
+    # Does simple port check through tcp
+    function portCheck() {
+      local host="$1" port="$2";
+	    (echo >/dev/tcp/${host}/${port}) &> /dev/null;
+      if [ $? != 0 ]; then
+        echo "The port ${white}${port}${reset} is ${red}closed${reset} on ${white}${host}${reset}";
+      else
+        echo "The port ${white}${port}${reset} is ${green}open${reset} on the host ${white}${host}${reset}";
+      fi
+    } 
   ;;
 esac
