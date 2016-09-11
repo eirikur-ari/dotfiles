@@ -1,7 +1,7 @@
 git:
   submodules: false
 env:
-  - MY_DOTFILES=$TRAVIS_BUILD_DIR
+  - DOTFILES_HOME=$TRAVIS_BUILD_DIR
 # use sed to replace the SSH URL with the public URL, then init and update submodules
 # install bats
 before_install:
