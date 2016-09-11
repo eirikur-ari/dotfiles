@@ -11,4 +11,4 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq bats
 script:
-  - bats --tap test/bats
+  - bats --tap test/bats/system
