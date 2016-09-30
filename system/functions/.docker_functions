@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# Removes all containers
+function docker-remove-containers {
+  local containers="";
+	containers="$(docker ps -a -q)";
+  [ ! -z "$containers" ] && docker rm "$containers";
+	[ -z "$containers" ] && echo "No containers to clean!";
+}
+
+# Removes all images
+function docker-remove-images {
+  local images="";
+	images="$(docker images -q)";
+  [ ! -z "$images" ] && docker rmi "$images";
+	[ -z "$images" ] && echo "No images to clean!";
+}
+
+# Removes all docker container and images
+function docker-spring-clean {
+  docker-clean-all-containers;
+	docker-clean-all-images;
+}
+
+# Removes all dangling docker images
+function docker-remove-dangling {
+  local danglers="";
+  danglers="$(docker images -f 'dangling=true' -q)";
+  [ ! -z "$danglers" ] && docker rmi "$danglers";
+  [ -z "$danglers" ] && echo "No dangling images!"
+}
