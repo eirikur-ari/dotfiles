@@ -1,6 +1,6 @@
 #!/usr/bin/env bats
 
-load "${DOTFILES_HOME}/system/.functions"
+load "${DOTFILES_HOME}/system/functions/.functions"
 
 @test "Invoking ssh-generate-key with no ssh key name" {
   run ssh-generate-key
