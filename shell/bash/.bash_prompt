@@ -1,26 +1,26 @@
 #!/usr/bin/env bash
 if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
-	export TERM=gnome-256color
+  export TERM=gnome-256color
 elif infocmp xterm-256color >/dev/null 2>&1; then
-	export TERM=xterm-256color
+  export TERM=xterm-256color
 fi
 
 if tput setaf 1 &> /dev/null; then
-	tput sgr0;                 # reset colors
+  tput sgr0;                 # reset colors
   bold=$(tput bold);
-	reset=$(tput sgr0);
+  reset=$(tput sgr0);
 
   black=$(tput setaf 235);
-	blue=$(tput setaf 33);
-	cyan=$(tput setaf 37);
-	green=$(tput setaf 64);
+  blue=$(tput setaf 33);
+  cyan=$(tput setaf 37);
+  green=$(tput setaf 64);
   orange=$(tput setaf 166);
-	purple=$(tput setaf 141);
-	red=$(tput setaf 124);
-	violet=$(tput setaf 61);
-	white=$(tput setaf 254);
-	yellow=$(tput setaf 136);
-	magenta=$(tput setaf 125);
+  purple=$(tput setaf 141);
+  red=$(tput setaf 124);
+  violet=$(tput setaf 61);
+  white=$(tput setaf 254);
+  yellow=$(tput setaf 136);
+  magenta=$(tput setaf 125);
 else
   bold='';
   reset="\e[0m";
@@ -35,32 +35,32 @@ else
   violet="\e[1;35m";
   white="\e[1;37m";
   yellow="\e[1;33m";
-	magenta="\e[1;35m";
+  magenta="\e[1;35m";
 fi
 
 # Handle domain user
 if [[ ${USER} == *"@"* ]]; then
   IFS='@' read -a domainuser <<< "${USER}"; 
   username=${domainuser[0]};
-	domain=${domainuser[1]};
-	#hostname=${domainuser[1]};
+  domain=${domainuser[1]};
+  #hostname=${domainuser[1]};
 else
   username=${USER};
-	domain="local"
-	#hostname=${HOSTNAME};
+  domain="local"
+  #hostname=${HOSTNAME};
 fi
 
 function gitInfo() {
-	# check if we're in a git repo
-	git rev-parse --is-inside-work-tree &>/dev/null || return
+  # check if we're in a git repo
+  git rev-parse --is-inside-work-tree &>/dev/null || return
 
-	# quickest check for what branch we're on
-	branch=$(git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||');
+  # quickest check for what branch we're on
+  branch=$(git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||');
 
-	# check if it's dirty (via github.com/sindresorhus/pure)
-	dirty=$(git diff --quiet --ignore-submodules HEAD &>/dev/null; [ $? -eq 1 ]&& echo -e "*");
+  # check if it's dirty (via github.com/sindresorhus/pure)
+  dirty=$(git diff --quiet --ignore-submodules HEAD &>/dev/null; [ $? -eq 1 ]&& echo -e "*");
 
-	echo "${white}" on "${purple}${branch}${yellow}${dirty}";
+  echo "${white}" on "${purple}${branch}${yellow}${dirty}";
 }
 
 function svnInfo() {
@@ -74,7 +74,7 @@ function svnInfo() {
   changes=$(svn status | grep "?\|\!\|M\|A" | wc -l);
   
   if [ $changes -gt 0 ]; then 
-  	dirty=$(echo -e "*");
+    dirty=$(echo -e "*");
   fi
 
   echo "${white}" on "${purple}${branch}${yellow}${dirty}";
@@ -99,14 +99,14 @@ function myHost() {
 }
 
 function myDomain() {
-	echo "${white}[${blue}${domain}${white}] ";
+  echo "${white}[${blue}${domain}${white}] ";
 }
 
 # Set the prompt string.
 function promptString() {
   PS1="\[\033]0;\w\007\]";                                 # terminal title (set to the current working directory)
   PS1+="\[${bold}\]";                                      # display prompt string in bold
-	 PS1+="\$(myDomain)";                                     # domain
+  PS1+="\$(myDomain)";                                     # domain
   PS1+="$(myUser)";                                        # username
   PS1+="\[${white}\] at ";                                 # at                                
   PS1+="$(myHost)";                                        # hostname
