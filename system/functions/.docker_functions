@@ -3,23 +3,23 @@
 # Removes all containers
 function docker-remove-containers {
   local containers="";
-	containers="$(docker ps -a -q)";
+  containers="$(docker ps -a -q)";
   [ ! -z "$containers" ] && docker rm "$containers";
-	[ -z "$containers" ] && echo "No containers to clean!";
+  [ -z "$containers" ] && echo "No containers to clean!";
 }
 
 # Removes all images
 function docker-remove-images {
   local images="";
-	images="$(docker images -q)";
+  images="$(docker images -q)";
   [ ! -z "$images" ] && docker rmi "$images";
-	[ -z "$images" ] && echo "No images to clean!";
+  [ -z "$images" ] && echo "No images to clean!";
 }
 
 # Removes all docker container and images
 function docker-spring-clean {
   docker-clean-all-containers;
-	docker-clean-all-images;
+  docker-clean-all-images;
 }
 
 # Removes all dangling docker images

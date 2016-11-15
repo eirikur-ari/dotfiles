@@ -44,6 +44,11 @@ function digs() {
   dig -t "$1" "$2" +short;
 }
 
+# less with color output
+function cless() {
+  pygmentize -g "$1" | less -R
+}
+
 # Switch between platforms
 case $(uname) in
   'Darwin')
