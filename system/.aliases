@@ -30,6 +30,9 @@ alias l='ls -CF'
 # IP adresses
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 
+# Timer
+alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
+
 # Switch between platform's
 case $(uname) in 
   'Darwin') 
