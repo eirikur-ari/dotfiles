@@ -81,3 +81,6 @@ alias ccat="pygmentize -g"
 alias quit=exit
 
 alias df="df -Th --total"
+
+# Gradle wrapper
+alias gw="sh gradlew"
