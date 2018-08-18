@@ -26,3 +26,11 @@ then
 fi
 " --tag-name-filter cat -- --branches --tags
 }
+
+function git_ignore_changes() {
+  git update-index --assume-unchanged "$1"
+}
+
+function git_notice_changes()  {
+  git update-index --no-assume-unchanged "$1"
+}
