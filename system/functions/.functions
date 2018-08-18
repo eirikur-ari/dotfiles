@@ -75,20 +75,5 @@ case $(uname) in
         echo "The port ${white}${port}${reset} is ${green}open${reset} on the host ${white}${host}${reset}";
       fi
     }
-
-    function setJDK() {
-      local version="$1";
-
-      rm -f '/usr/java/latest'
-
-      case $version in
-        8)
-         ln -sv '/usr/java/jdk1.8.0_152' '/usr/java/latest'
-        ;;
-        5)
-         ln -sv '/usr/java/jdk1.5.0_22' '/usr/java/latest'
-        ;;
-      esac
-    }
   ;;
 esac
