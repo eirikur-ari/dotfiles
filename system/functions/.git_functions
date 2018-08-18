@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+function git-author-rewrite {
+local old_email="$1" correct_name="$2" correct_email="$3"
+
+if [[ -z "$old_email" || -z "$correct_name" || -z "$correct_email" ]]; then
+  printf "\n";
+  printf "please provide params in the following order:
+    1. old email
+    2. current name
+    3. current email\n"
+  printf "\n";
+  return;
+fi
+
+git filter-branch --env-filter "
+if [ $GIT_COMMITTER_EMAIL = $old_email ]
+then
+    export GIT_COMMITTER_NAME=$correct_name
+    export GIT_COMMITTER_EMAIL=$correct_email
+fi
+if [ $GIT_AUTHOR_EMAIL = $old_email ]
+then
+    export GIT_AUTHOR_NAME=$correct_name
+    export GIT_AUTHOR_EMAIL=$correct_email
+fi
+" --tag-name-filter cat -- --branches --tags
+}
