@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# Rewrites the git author history. 
+# Replaces the current author with a new author information.
+# To update a central git repo, execute the following:
+# git push --force --tags origin 'refs/heads/*' 
 function git-author-rewrite {
 local old_email="$1" correct_name="$2" correct_email="$3"
 
@@ -34,10 +38,14 @@ fi
 unset OLD_EMAIL CORRECT_NAME CORRECT_EMAIL
 }
 
+# Updates the index to ignore all changes to a given file.
 function git_ignore_changes() {
   git update-index --assume-unchanged "$1"
 }
 
+# Updates the index to allow changes to a given file.
+# Use this command when a ignored file changes needs to 
+# be committed.
 function git_notice_changes()  {
   git update-index --no-assume-unchanged "$1"
 }
