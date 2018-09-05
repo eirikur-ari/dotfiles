@@ -13,18 +13,25 @@ if [[ -z "$old_email" || -z "$correct_name" || -z "$correct_email" ]]; then
   return;
 fi
 
-git filter-branch --env-filter "
-if [ $GIT_COMMITTER_EMAIL = $old_email ]
+export OLD_EMAIL="$old_email"
+export CORRECT_NAME="$correct_name"
+export CORRECT_EMAIL="$correct_email"
+
+git filter-branch --env-filter '
+
+if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]
 then
-    export GIT_COMMITTER_NAME=$correct_name
-    export GIT_COMMITTER_EMAIL=$correct_email
+    export GIT_COMMITTER_NAME="$CORRECT_NAME"
+    export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"
 fi
-if [ $GIT_AUTHOR_EMAIL = $old_email ]
+if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]
 then
-    export GIT_AUTHOR_NAME=$correct_name
-    export GIT_AUTHOR_EMAIL=$correct_email
+    export GIT_AUTHOR_NAME="$CORRECT_NAME"
+    export GIT_AUTHOR_EMAIL="$CORRECT_EMAIL"
 fi
-" --tag-name-filter cat -- --branches --tags
+' --tag-name-filter cat -- --branches --tags
+
+unset OLD_EMAIL CORRECT_NAME CORRECT_EMAIL
 }
 
 function git_ignore_changes() {
