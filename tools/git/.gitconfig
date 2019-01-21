@@ -30,3 +30,9 @@
   tool = diffmerge
 [grep]
   lineNumber = 1 # enables prefix line number to matching lines
+[alias]
+  git = !exec git
+  aliases = config --get-regexp alias
+  ignore = update-index --assume-unchanged
+  unignore = update-index --no-assume-unchanged
+  ignored = !git ls-files -v | grep "^[[:lower:]]"
