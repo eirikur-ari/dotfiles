@@ -1,6 +1,6 @@
 # My dotfiles
 
-[![Build Status](https://travis-ci.org/eirikur-ari/dotfiles.svg?branch=master)](https://travis-ci.org/eirikur-ari/dotfiles)
+[![Build Status](https://travis-ci.com/eirikur-ari/dotfiles.svg?branch=master)](https://travis-ci.com/eirikur-ari/dotfiles)
 
 Installation
 ===
