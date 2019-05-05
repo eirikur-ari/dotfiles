@@ -5,7 +5,6 @@ SHELL=/bin/bash
 build:
 	mkdir -p build/dotfiles
 	rsync -a ./ ./build/dotfiles --exclude='build/' --exclude='.git/'
-	#find . -type f -not -iname './.*' -not -iname 'build/' -exec cp '{}' 'build/dotfiles/{}' ';'
 
 test:
 	bats --tap test/bats/system
