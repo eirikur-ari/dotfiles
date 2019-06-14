@@ -14,10 +14,18 @@ load "${DOTFILES_HOME}/system/functions/.functions"
     [ "$actual" -eq "$expected" ]
 }
 
-@test "Verify that record type 'A' on www.mbl.is is 92.43.192.110" {
-  run digs A www.mbl.is
+@test "Verify that record type 'A' on www.example.com is 93.184.216.34" {
+  run digs A www.example.com
   [ "$status" -eq 0 ]
-  [ "$output" = "92.43.192.110" ]
+  [ "$output" = "93.184.216.34" ]
+}
+
+@test "Verify that base64d is able to decode base64 string" {
+  expected="this is a password!"
+  password=$(echo "$expected" | base64)
+  run base64d "$password"
+  [ "$status" -eq 0 ]
+  [ "$output" = "$expected" ]
 }
 
 case $(uname) in
@@ -28,10 +36,10 @@ case $(uname) in
       [ "$output" = "The port 80 is closed on localhost" ]
     }
 
-    @test "Verify that port 80 is open on www.mbl.is" {
-      run portCheck www.mbl.is 80
+    @test "Verify that port 80 is open on www.example.com" {
+      run portCheck www.example.com 80
       [ "$status" -eq 0 ]
-      [ "$output" = "The port 80 is open on the host www.mbl.is" ]
+      [ "$output" = "The port 80 is open on the host www.example.com" ]
     }
   ;;
 esac
