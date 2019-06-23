@@ -17,7 +17,7 @@ install:
 	sh install.sh
 
 check:
-	shellcheck ./shell/bash/.* ./system/**/.* ./system/.* ./*.sh
+	shellcheck ./shell/bash/.bash* ./system/functions/.*functions ./*.sh
 
 clean:
 	rm -rf build/
