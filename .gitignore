@@ -8,6 +8,9 @@ Desktop.ini
 # vim files
 .netrwhist
 
+# Vagrant
+.vagrant/
+
 # Other
 build/
 *.swp
