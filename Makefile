@@ -16,5 +16,8 @@ release: test build
 install:
 	sh install.sh
 
+check:
+	shellcheck ./shell/bash/.* ./system/**/.* ./system/.* ./*.sh
+
 clean:
 	rm -rf build/
