@@ -54,6 +54,14 @@ function base64d(){
   echo "${1}" | base64 --decode
 }
 
+# Coin toss for decision making
+# Want to tempt fate?
+# Call HEADS or TAILS and toss that coin!
+function coin-toss() {
+  local result=$(( ( RANDOM % 10 ) +1 ));
+  [[ "$result" -gt 5 ]] && echo "HEADS" || echo "TAILS";
+}
+
 # Switch between platforms
 case $(uname) in
   'Darwin')
