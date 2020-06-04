@@ -62,6 +62,7 @@ case $(uname) in
     alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
 
     alias df="df -H"
+    alias ps="ps -Ao user,pid,%cpu,%mem,vsz,rss,tt,stat,start,time,command"
   ;;
   'Linux')
 
