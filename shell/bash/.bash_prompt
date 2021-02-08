@@ -43,11 +43,9 @@ if [[ ${USER} == *"@"* ]]; then
   IFS='@' read -a domainuser <<< "${USER}"; 
   username=${domainuser[0]};
   domain=${domainuser[1]};
-  #hostname=${domainuser[1]};
 else
   username=${USER};
   domain="local"
-  #hostname=${HOSTNAME};
 fi
 
 function gitInfo() {
@@ -102,10 +100,16 @@ function myDomain() {
   echo "${white}[${blue}${domain}${white}] ";
 }
 
+function currentTime() {
+  current=$(date +%H:%M);
+  echo "${white}[${magenta}${current}${white}] ";
+}
+
 # Set the prompt string.
 function promptString() {
   PS1="\[\033]0;\w\007\]";                                 # terminal title (set to the current working directory)
   PS1+="\[${bold}\]";                                      # display prompt string in bold
+  PS1+="\$(currentTime)";                                  # Current time in HH:MM
   PS1+="\$(myDomain)";                                     # domain
   PS1+="$(myUser)";                                        # username
   PS1+="\[${white}\] at ";                                 # at                                
