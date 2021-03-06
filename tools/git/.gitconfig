@@ -40,4 +40,4 @@
   cc = !git code-changes
 
 [pull]
-	rebase = true
+	rebase = false
