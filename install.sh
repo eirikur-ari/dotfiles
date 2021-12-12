@@ -75,7 +75,9 @@ function main() {
   printf "Creating symlinks for .config\n"
   symlink configfiles[@] ~/.config/;
 
+  printf "Creating extra config files\n"
   addConfig ~/.extra "export DOTFILES_HOME=$my_dotfiles";
+  addConfig ~/.gitconfig_extra "";
   source ~/.bashrc; 
 }
 
