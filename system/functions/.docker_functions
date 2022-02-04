@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 # Removes all containers
-function docker-remove-containers {
+function docker-remove-containers() {
   docker container prune -f
 }
 
 # Removes all images
-function docker-remove-images {
+function docker-remove-images() {
   local images="";
   images=$(docker images -q);
   [ ! -z "$images" ] && docker rmi -f $images;
@@ -14,15 +14,26 @@ function docker-remove-images {
 }
 
 # Removes all docker container and images
-function docker-spring-clean {
+function docker-spring-clean() {
   docker-remove-containers;
   docker-remove-images;
 }
 
 # Removes all dangling docker images
-function docker-remove-dangling {
+function docker-remove-dangling() {
   local danglers="";
   danglers="$(docker images -f 'dangling=true' -q)";
   [ ! -z "$danglers" ] && docker rmi --force $danglers;
   [ -z "$danglers" ] && echo "No dangling images!"
+}
+
+# Lists IPv4 address of all containers within given network
+function docker-list-network-container-ip() {
+  local network="$1";
+
+  if [ -z "$network" ]; then
+    echo "Please provide network name";
+  else
+    docker network inspect -f '{{json .Containers}}' "$network" | jq '.[] | .Name + ":" + .IPv4Address' 
+  fi
 }
