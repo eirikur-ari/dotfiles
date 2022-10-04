@@ -62,6 +62,10 @@ function coin-toss() {
   [[ "$result" -gt 5 ]] && echo "HEADS" || echo "TAILS";
 }
 
+function httpServer() {
+  python -m http.server --bind 127.0.0.1 9000
+}
+
 # Switch between platforms
 case $(uname) in
   'Darwin')
