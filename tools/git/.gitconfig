@@ -41,6 +41,10 @@
   code-changes = !git log --format=format: --name-only | egrep -v '^$' | sort | uniq -c | sort -rg | head -10
   cc = !git code-changes
   unstage = git reset --soft HEAD~1
+  rank = shortlog -s -n -e --no-merges 
 
 [pull]
 	rebase = false
+[safe]
+	directory = /usr/local/share/dotfiles
+	directory = /usr/local/share/extra-dotfiles
