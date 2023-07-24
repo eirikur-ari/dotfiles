@@ -12,7 +12,7 @@
 	url = git@github.com:vim-scripts/vim-gradle.git
 [submodule "tools/vim/.vim/bundle/puppet"]
 	path = tools/vim/.vim/bundle/puppet
-	url = git://github.com/rodjek/vim-puppet.git
+	url = git@github.com:rodjek/vim-puppet.git
 [submodule "tools/vim/.vim/bundle/vim-airline"]
 	path = tools/vim/.vim/bundle/vim-airline
 	url = git@github.com:vim-airline/vim-airline.git
