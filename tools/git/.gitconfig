@@ -48,3 +48,5 @@
 [safe]
 	directory = /usr/local/share/dotfiles
 	directory = /usr/local/share/extra-dotfiles
+	directory = /opt/dotfiles
+	directory = /opt/extra-dotfiles
