@@ -105,5 +105,9 @@ case $(uname) in
         echo "The port ${white}${port}${reset} is ${green}open${reset} on the host ${white}${host}${reset}";
       fi
     }
+
+    function list-running-services() {
+      systemctl list-units --type=service --state=running
+    }
   ;;
 esac
