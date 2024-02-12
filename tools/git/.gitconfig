@@ -6,6 +6,7 @@
 [core]
   excludefile = ~/.gitignore_global
   editor = vim
+  autocrlf = input
 [color]
   ui = auto
 [color "branch"]
