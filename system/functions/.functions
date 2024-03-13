@@ -109,5 +109,12 @@ case $(uname) in
     function list-running-services() {
       systemctl list-units --type=service --state=running
     }
+
+    function webm2gif() {
+      local name="$1"
+      ffmpeg -y -i "${name}" -vf palettegen "/tmp/${name}_palette.png"
+      ffmpeg -y -i "${name}" -i "/tmp/${name}_palette.png" -filter_complex paletteuse -r 10  "${1%.webm}.gif"
+      rm "/tmp/${name}_palette.png"
+    }
   ;;
 esac
