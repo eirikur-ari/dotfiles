@@ -1,0 +1,30 @@
+name: Makefile CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+      DOTFILES_HOME: ${GITHUB_WORKSPACE}
+
+    steps:
+    - name: Checkout repository
+    - uses: actions/checkout@v4
+
+    - name: Checkout submodules
+    - run: sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+    - run: git submodule update --init --recursive
+
+    - name: Install dependencies
+    - run: sudo add-apt-repository ppa:duggan/bats --yes
+    - run: sudo apt-get update -qq
+    - run: sudo apt-get install -qq bats
+
+    - name: Run test
+      run: make test
