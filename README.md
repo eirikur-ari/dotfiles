@@ -1,6 +1,6 @@
 # My dotfiles
 
-[![Build Status](https://travis-ci.com/eirikur-ari/dotfiles.svg?branch=master)](https://travis-ci.com/eirikur-ari/dotfiles)
+[![Build Status](https://github.com/eirikur-ari/dotfiles/actions/workflows/pipeline.yml/badge.svg?branch=master)](https://github.com/eirikur-ari/dotfiles/actions)
 
 Installation
 ===
