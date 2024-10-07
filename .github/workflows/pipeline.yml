@@ -10,8 +10,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    env:
-      DOTFILES_HOME: $GITHUB_WORKSPACE
 
     steps:
     - name: Checkout repository
@@ -22,6 +20,8 @@ jobs:
         sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
         git submodule update --init --recursive
 
+    - name: Configuration
+      run: export DOTFILES_HOME=$GITHUB_WORKSPACE
     - name: Install dependencies
       run: sudo apt-get install -qq bats
 
