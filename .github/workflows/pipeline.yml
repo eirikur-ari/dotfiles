@@ -11,7 +11,7 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-      DOTFILES_HOME: ${GITHUB_WORKSPACE}
+      DOTFILES_HOME: ${github.workspace}
 
     steps:
     - name: Checkout repository
