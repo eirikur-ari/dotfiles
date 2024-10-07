@@ -23,10 +23,7 @@ jobs:
         git submodule update --init --recursive
 
     - name: Install dependencies
-      run: |
-        sudo add-apt-repository ppa:duggan/bats --yes
-        sudo apt-get update -qq
-        sudo apt-get install -qq bats
+      run: sudo apt-get install -qq bats
 
     - name: Run test
       run: make test
