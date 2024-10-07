@@ -1,4 +1,4 @@
-name: Makefile CI
+name: Dotfiles CI
 
 on:
   push:
@@ -12,18 +12,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: "Checkout repository"
       uses: actions/checkout@v4
 
-    - name: Checkout submodules
+    - name: "Checkout submodules"
       run: |
         sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
         git submodule update --init --recursive
 
-    - name: Configuration
-      run: export DOTFILES_HOME=$GITHUB_WORKSPACE
+    - name: "Configuration"
+      run: echo "DOTFILES_HOME=$GITHUB_WORKSPACE" >> $GITHUB_ENV
+      
     - name: Install dependencies
       run: sudo apt-get install -qq bats
 
-    - name: Run test
+    - name: "Run test"
       run: make test
