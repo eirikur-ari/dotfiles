@@ -87,7 +87,7 @@ alias quit=exit
 alias gw="sh gradlew"
 
 # Docker Compose
-alias dc='docker-compose'
+alias dc='docker compose'
 alias dcu='dc up -d'
 alias dcuf='dcu --force-recreate --no-deps'
 alias dcd='dc down'
