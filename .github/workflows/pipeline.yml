@@ -22,9 +22,12 @@ jobs:
 
     - name: "Configuration"
       run: echo "DOTFILES_HOME=$GITHUB_WORKSPACE" >> $GITHUB_ENV
-      
-    - name: Install dependencies
-      run: sudo apt-get install -qq bats
+
+    - name: "Update package repository"
+      run: sudo apt update
+
+    - name: Install package dependencies
+      run: sudo apt-get install -qq bats bc dnsutils
 
     - name: "Run test"
       run: make test
