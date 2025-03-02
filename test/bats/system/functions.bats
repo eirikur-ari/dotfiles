@@ -14,7 +14,7 @@ load "${DOTFILES_HOME}/system/functions/.functions"
     [ "$actual" -eq "$expected" ]
 }
 
-@test "Verify that record type 'A' on www.example.com is 93.184.216.34" {
+@test "Verify that record type 'A' on www.example.com contains records" {
   run digs A www.example.com
   [ "$status" -eq 0 ]
   [ -n "$output" ]
