@@ -4,7 +4,7 @@
 [includeIf "gitdir:~/workspace/company/"]
   path = ~/.gitconfig_extra
 [core]
-  excludefile = ~/.gitignore_global
+  excludesfile = ~/.gitignore_global
   editor = vim
   autocrlf = input
   sshCommand = ssh -v
