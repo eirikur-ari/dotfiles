@@ -18,11 +18,6 @@ jobs:
         submodules: recursive
         token: ${{ secrets.GITHUB_TOKEN }}
 
-  #  - name: "Checkout submodules"
-  #    run: |
-  #      sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
-  #      git submodule update --init --recursive
-
     - name: "Configuration"
       run: echo "DOTFILES_HOME=$GITHUB_WORKSPACE" >> $GITHUB_ENV
 
