@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#lc!/usr/bin/env bash
 # Create a new directory and enter it
 function mkd() {
   mkdir -p "$@" && cd "$_";
@@ -24,6 +24,11 @@ function ssh-generate-key() {
 # Simple Calculator
 function calc() {
   echo "$*" | bc -l;
+}
+
+# Convert seconds to minutes
+function secToMin() {
+  calc "$1"/60;
 }
 
 cp_p () {
@@ -111,10 +116,36 @@ case $(uname) in
     }
 
     function webm2gif() {
+      if [ $# -eq 0 ]; then
+        echo "Usage: webm2gif <filename>"
+        return 1
+      fi
       local name="$1"
       ffmpeg -y -i "${name}" -vf palettegen "/tmp/${name}_palette.png"
       ffmpeg -y -i "${name}" -i "/tmp/${name}_palette.png" -filter_complex paletteuse -r 10  "${1%.webm}.gif"
       rm "/tmp/${name}_palette.png"
+    }
+
+    function runGrype {
+      if [ $# -eq 0 ]; then
+        echo "Usage: runGrype <image>"
+      else
+        docker run --rm -v /tmp:/tmp -v /var/run/docker.sock:/var/run/docker.sock anchore/grype -o json ${1} > grype-report.json
+      fi
+    }
+
+    function runDockle {
+      if [ $# -eq 0 ]; then
+        echo "Usage: runDockle <image>"
+      else
+        DOCKLE_LATEST=$(
+          curl --silent "https://api.github.com/repos/goodwithtech/dockle/releases/latest" | \
+          grep '"tag_name":' | \
+          sed -E 's/.*"v([^"]+)".*/\1/' \
+        )
+
+        docker run --rm -v /var/run/docker.sock:/var/run/docker.sock --rm goodwithtech/dockle:v${DOCKLE_LATEST}  -f json  --timeout 200s ${1} > dockle-report.json
+      fi
     }
   ;;
 esac

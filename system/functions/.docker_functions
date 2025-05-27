@@ -13,6 +13,11 @@ function docker-remove-images() {
   [ -z "$images" ] && echo "No images to clean!";
 }
 
+# Remove the build cache
+function docker-remove-build-cache() {
+  docker builder prune
+}
+
 # Removes all docker container and images
 function docker-spring-clean() {
   docker-remove-containers;
@@ -44,4 +49,8 @@ function docker-list-network-container-ip() {
   else
     docker network inspect -f '{{json .Containers}}' "$network" | jq '.[] | .Name + ":" + .IPv4Address' 
   fi
+}
+
+function docker-disk-usage() {
+  docker system df
 }
