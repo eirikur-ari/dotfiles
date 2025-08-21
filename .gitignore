@@ -11,6 +11,9 @@ Desktop.ini
 # Vagrant
 .vagrant/
 
+# Visual Studio code
+.vscode/
+
 # Other
 build/
 *.swp
