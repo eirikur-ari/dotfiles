@@ -126,7 +126,7 @@ case $(uname) in
       rm "/tmp/${name}_palette.png"
     }
 
-    function runGrype {
+    function grype-scan {
       if [ $# -eq 0 ]; then
         echo "Usage: runGrype <image>"
       else
@@ -134,7 +134,7 @@ case $(uname) in
       fi
     }
 
-    function runDockle {
+    function dockle-scan {
       if [ $# -eq 0 ]; then
         echo "Usage: runDockle <image>"
       else
