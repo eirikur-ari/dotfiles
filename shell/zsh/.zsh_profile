@@ -1,0 +1,23 @@
+#!/usr/bin/env zsh
+# Load ~/.extra, ~/.exports, ~/.aliases, ~/.functions etc.
+# ~/.extra can be used for settings you don’t want to commit
+for file in ~/.{extra,exports,aliases,functions,docker_functions,git_functions}; do
+	[ -r "$file" ] && source "$file"
+done
+unset file
+
+# Timestamps for later analysis
+export HISTTIMEFORMAT='%F %T '
+
+# Keep history up to date across sessions, in realtime
+export HISTCONTROL="ignoredups:erasedups"   # No duplicate entries
+export HISTSIZE=100000                      # Big history
+export SAVEHIST=$HISTSIZE                   # Save history size
+setopt APPEND_HISTORY                       # Append to the history file instead of overwriting it
+setopt SHARE_HISTORY                        # Synchronize the history across multiple terminal sessions in real time
+
+# Case-insensitive globbing
+setopt NO_case_glob
+
+# Add tab completion for SSH hostnames based on ~/.ssh/config
+zstyle ':completion:*' hosts ~/.ssh/config

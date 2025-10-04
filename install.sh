@@ -3,7 +3,6 @@
 # Let's get the full path where the script and git repository are located
 my_dotfiles="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
 
-
 # Update my git repo and submodules
 function update() {
   local my_git=" git --work-tree=$my_dotfiles --git-dir=$my_dotfiles/.git ";
@@ -53,32 +52,76 @@ function addConfig() {
   fi
 }
 
-# Runs the installation
-function main() {
-   # List of dotfiles that we want to link to users home directory
-  local dotfiles=("tools/git/.gitignore_global" "tools/git/.gitconfig" "shell/bash/.bashrc" "shell/bash/.bash_profile" \
-  "shell/bash/.bash_prompt" "system/.aliases" "system/functions/.functions" "system/functions/.docker_functions" "system/functions/.git_functions" "system/.exports" "system/.inputrc" "tools/wget/.wgetrc" \
-  "tools/vim/.vimrc" "tools/vim/.vim" "tools/gvim/.gvimrc");  
+# Will install dotfiles
+function doInstall() {
+  # List of dotfiles that we want to link to users home directory
+  local dotfiles=("tools/git/.gitignore_global" "tools/git/.gitconfig" "system/.aliases"
+  "system/functions/.functions" "system/functions/.docker_functions" "system/functions/.git_functions" \
+  "system/.exports" "tools/wget/.wgetrc" "tools/vim/.vimrc" "tools/vim/.vim");  
   local svnfiles=("tools/subversion/config" "tools/subversion/servers");
-  local configfiles=("tools/terminator");
 
-  # Make sure we have the latest update
-  update;
-
-  # install & activate
+  # install
   printf "Creating symlinks for .files\n"
   symlink dotfiles[@] ~;
 
   printf "Creating symlinks for .subversion\n"
   symlink svnfiles[@] ~/.subversion;
-  
-  printf "Creating symlinks for .config\n"
-  symlink configfiles[@] ~/.config/;
 
   printf "Creating extra config files\n"
   addConfig ~/.extra "export DOTFILES_HOME=$my_dotfiles";
   addConfig ~/.gitconfig_extra "";
-  source ~/.bashrc; 
+
+  case $(uname) in 
+  'Linux')
+    local linuxdotfiles=("tools/gvim/.gvimrc");
+    local linuxconfigfiles=("tools/terminator")
+
+    printf "Creating symlinks for .files\n"
+    symlink linuxdotfiles[@] ~;
+
+    printf "Creating symlinks for .config\n"
+    symlink linuxconfigfiles[@] ~/.config/;
+  ;;
+  esac
+}
+
+# Runs the installation
+function main() {
+  # Make sure we have the latest update
+  update;
+
+  local current_shell="$SHELL";
+  printf "Installing for %s\n" $current_shell;
+  
+  case "$current_shell" in
+    */bash)
+      local bashfiles=("shell/bash/.bashrc" "shell/bash/.bash_profile" "shell/bash/.bash_prompt" "system/.inputrc");
+
+      # install
+      printf "Creating symlinks for .files\n"
+      symlink bashfiles[@] ~;
+
+      doInstall;
+
+      # activate
+      source ~/.bashrc;
+    ;;
+    */zsh)
+      local zshfiles=("shell/zsh/.zshrc" "shell/zsh/.zsh_profile");
+
+      # install
+      printf "Creating symlinks for .files\n"
+      symlink zshfiles[@] ~;
+      
+      doInstall;
+
+      # activate
+      source ~/.zshrc;
+    ;;
+    *)
+      echo "Unknown shell: $current_shell"
+    ;;
+  esac
 }
 
 main;                   # Execute program
