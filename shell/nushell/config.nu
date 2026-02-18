@@ -12,3 +12,6 @@ alias df = df -H
 
 ## Continue
 alias quit = exit
+
+# Themes
+source ./themes/catppuccin/catppuccin_mocha.nu
