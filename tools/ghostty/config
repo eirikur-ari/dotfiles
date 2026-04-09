@@ -1,0 +1,30 @@
+# Ghostty configuration file.
+#
+# Run `ghostty +show-config --default --docs | nvim` to view a list of
+# all available config options and their default values.
+#
+# Additionally, each config option is also explained in detail
+# on Ghostty's website, at https://ghostty.org/docs/config.
+#
+# Ghostty can reload the configuration while running by using the menu
+# options or the bound key (default: Command + Shift + comma on macOS and
+# Control + Shift + comma on other platforms). Not all config options can be
+# reloaded while running; some only apply to new windows and others may require
+# a full restart to take effect.
+#
+# Examples: https://github.com/search?q=path%3Aghostty%2Fconfig&type=code
+
+
+# Theme, run `ghostty +list-themes`
+theme = Catppuccin Frappe
+
+# Font, run `ghostty +list-fonts`
+font-family = JetBrainsMono Nerd Font Mono
+font-size = 14
+
+# Terminal Background
+background-opacity = 0.80
+background-blur-radius = 40
+
+# Keybindings, run `ghostty +list-keybinds --default` to see default keybindings
+
