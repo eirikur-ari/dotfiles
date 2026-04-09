@@ -12,6 +12,7 @@ $env.HOMEBREW_NO_ENV_HINTS = 1
 use std "path add"
 path add "/opt/homebrew/bin"
 path add "/opt/homebrew/sbin"
+path add ".cargo/bin"
 
 ## NuShell Prompts - Starthip
 $env.STARSHIP_SHELL = "nu"
