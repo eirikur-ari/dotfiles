@@ -1,4 +1,18 @@
-execute pathogen#infect()
+" Install plugins via Plug
+" :PlugInstall, :PlugUpdate, :PlugStatus
+" See, https://github.com/junegunn/vim-plug
+call plug#begin()
+Plug 'vim-scripts/bats.vim'
+Plug 'vim-scripts/groovy.vim'
+Plug 'vim-scripts/vim-gradle'
+Plug 'catppuccin/vim', { 'branch': 'main', 'as': 'catppuccin' }
+Plug 'rodjek/vim-puppet'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'vim-syntastic/syntastic'
+call plug#end()
 
 " Set syntax highlighting options
 syntax on
@@ -6,11 +20,12 @@ syntax on
 filetype plugin indent on
 
 " Set theme
-colorscheme molokai
-let g:rehash256 = 1
+let g:lightline = {'colorscheme': 'catppuccin_mocha'}
+"let g:rehash256 = 1
+set termguicolors
+set noshowmode
 
-" Add Airline theme & enable powerline
-let g:airline_theme='molokai'
+let g:airline_theme = 'catppuccin_mocha'
 let g:airline_powerline_fonts = 1
 
 " Make Vim more useful

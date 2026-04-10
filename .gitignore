@@ -7,6 +7,7 @@ Desktop.ini
 
 # vim files
 .netrwhist
+tools/vim/.vim/plugged/
 
 # Vagrant
 .vagrant/
