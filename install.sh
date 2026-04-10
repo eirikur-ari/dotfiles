@@ -3,10 +3,10 @@
 # Let's get the full path where the script and git repository are located
 my_dotfiles="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
 
-# Update my git repo and submodules
+# Update my git repo
 function update() {
   local my_git=" git --work-tree=$my_dotfiles --git-dir=$my_dotfiles/.git ";
-  [ -d "$my_dotfiles/.git" ] && ${my_git} pull origin master && ${my_git} submodule init && ${my_git} submodule update;
+  [ -d "$my_dotfiles/.git" ] && ${my_git} pull origin master;
 }
 
 # Move dotfiles to backup directory
