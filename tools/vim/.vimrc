@@ -18,11 +18,16 @@ syntax on
 
 filetype plugin indent on
 
-" Set theme
-let g:lightline = {'colorscheme': 'catppuccin_mocha'}
-set termguicolors
-set noshowmode
+" Enable terminal GUI colors
+if has('termguicolors')
+  set termguicolors
+endif
 
+" Color
+let g:catppuccin_flavour = 'mocha'
+colorscheme catppuccin_mocha
+
+" Airline
 let g:airline_theme = 'catppuccin_mocha'
 let g:airline_powerline_fonts = 1
 
