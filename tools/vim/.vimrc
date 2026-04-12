@@ -1,17 +1,16 @@
 " Install plugins via Plug
-" :PlugInstall, :PlugUpdate, :PlugStatus
+" :PlugInstall, :PlugUpdate, :PlugStatus, :PlugClean
 " See, https://github.com/junegunn/vim-plug
 call plug#begin()
-Plug 'vim-scripts/bats.vim'
-Plug 'vim-scripts/groovy.vim'
-Plug 'vim-scripts/vim-gradle'
-Plug 'catppuccin/vim', { 'branch': 'main', 'as': 'catppuccin' }
-Plug 'rodjek/vim-puppet'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-fugitive'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'vim-syntastic/syntastic'
+Plug 'vim-scripts/bats.vim', { 'tag': '0.1.0' }                 " Extends the built in shell highlighting (sh.vim) for Bash Automated Testing System.
+Plug 'vim-scripts/groovy.vim', { 'tag': '0.1.9' }               " Suppport Groovy syntax.
+Plug 'vim-scripts/vim-gradle', { 'tag': '0.1'  }                " Support for Gradle and Groovy syntax
+Plug 'catppuccin/vim', { 'branch': 'main', 'as': 'catppuccin' } " Catppuccin theme for Vim
+Plug 'rodjek/vim-puppet', { 'tag': '1.0.0' }                    " Support for Puppet syntax
+Plug 'vim-airline/vim-airline', { 'tag': 'v0.11' }              " Vim statusline/tabline.
+Plug 'tpope/vim-fugitive', { 'branch': 'master' }               " Git support 
+Plug 'editorconfig/editorconfig-vim', { 'branch': 'master' }    " Support for using .editorconfig files to maintain consistent coding styles
+Plug 'vim-syntastic/syntastic', { 'branch': 'master' }          " Linter for multiple languages, note: It was archived Sep. 20th, 2023
 call plug#end()
 
 " Set syntax highlighting options
@@ -21,7 +20,6 @@ filetype plugin indent on
 
 " Set theme
 let g:lightline = {'colorscheme': 'catppuccin_mocha'}
-"let g:rehash256 = 1
 set termguicolors
 set noshowmode
 
