@@ -17,6 +17,7 @@ tools/vim/.vim/plugged/
 
 # NuShell
 history.txt
+shell/nushell/extra.nu
 
 # Other
 build/
