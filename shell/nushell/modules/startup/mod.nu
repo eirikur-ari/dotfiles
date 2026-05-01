@@ -1,1 +1,1 @@
-export use commands.nu *
+export use functions.nu *
