@@ -1,20 +1,26 @@
 # Environment Variables
-$env.config.buffer_editor = "vim"
+$env.config.buffer_editor = "nvim"
 
+# Remove default banner
+$env.config.show_banner = false
 
-## HOMEBREW
-$env.HOMEBREW_PREFIX = "/opt/homebrew"
-$env.HOMEBREW_CELLAR = "/opt/homebrew/Cellar"
-$env.HOMEBREW_REPOSITORY = "/opt/homebrew"
-$env.INFOPATH = "/opt/homebrew/share/info:"
-$env.HOMEBREW_NO_ENV_HINTS = 1
-
+# Import path add to append directories to $env.PATH
 use std "path add"
-path add "/opt/homebrew/bin"
-path add "/opt/homebrew/sbin"
+
+# MacOS only
+if (sys host).name == "Darwin" {
+    $env.HOMEBREW_PREFIX = "/opt/homebrew"
+    $env.HOMEBREW_CELLAR = "/opt/homebrew/Cellar"
+    $env.HOMEBREW_REPOSITORY = "/opt/homebrew"
+    $env.INFOPATH = "/opt/homebrew/share/info:"
+    $env.HOMEBREW_NO_ENV_HINTS = 1
+    path add "/opt/homebrew/bin"
+    path add "/opt/homebrew/sbin"
+}
+
 path add ".cargo/bin"
 
-## NuShell Prompts - Starthip
+## NuShell Prompts - Starship
 $env.STARSHIP_SHELL = "nu"
 
 def create_left_prompt [] {
