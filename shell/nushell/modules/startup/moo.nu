@@ -1,7 +1,7 @@
 # Startup routine that displays a random fortune message spoken by a random cow.
 # Combines fortune, fmt, and cowsay/cowthink to create a randomized greeting
 # each time a new shell session is started.
-export def moo [] {
+export def main [] {
   # Randomly pick between cowsay (speech bubble) and cowthink (thought bubble)
   let effect = (["cowsay" "cowthink"] | get (random int 0..1))
 

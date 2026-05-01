@@ -1,1 +1,1 @@
-export use other/other-aliases.nu *
+export use other *

@@ -6,7 +6,8 @@ def calc [input: string] {
 # Display free disk space in human readable format
 def df [] { 
   if ($nu.os-info.name == 'macos') {
-    ^df -H
+    # The str replace is needed here because header and data has a space in it.
+    ^df -h | str replace "Mounted on" Mounted_On | str replace "map auto_home" map_auto_home | detect columns
   } else {
     ^df -Th --total
   }

@@ -18,6 +18,7 @@ if (sys host).name == "Darwin" {
     path add "/opt/homebrew/sbin"
 }
 
+# Rust packages
 path add ".cargo/bin"
 
 ## NuShell Prompts - Starship
