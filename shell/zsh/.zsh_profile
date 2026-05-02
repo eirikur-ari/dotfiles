@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 # Load ~/.extra, ~/.exports, ~/.aliases, ~/.functions etc.
 # ~/.extra can be used for settings you don’t want to commit
-for file in ~/.{extra,exports,aliases,functions,docker_functions,git_functions}; do
+for file in ~/.{extra,zsh_prompt,exports,aliases,functions,docker_functions,git_functions}; do
 	[ -r "$file" ] && source "$file"
 done
 unset file

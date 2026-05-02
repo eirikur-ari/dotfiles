@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+# Initialize starship as default prompt
+# https://starship.rs/
+# https://github.com/starship/starship
+eval "$(starship init zsh)"
