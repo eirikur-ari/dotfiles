@@ -17,5 +17,5 @@ export def main [] {
   let cow = ($cows | get (random int 0..($cows | length | $in - 1)))
 
   # Generate a fortune, wrap it at 80 chars, and pipe it through the chosen cow
-  ^fortune | ^fmt -80 -s | ^$effect $flag -f $cow -n
+  ^fortune | ^fmt -80 -s | ^$effect $flag -f $cow -n | print --stderr
 }
