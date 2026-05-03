@@ -11,11 +11,11 @@ export def main [] {
 
   # Get the list of available cow files from cowsay, skipping the header line,
   # then flatten and clean up whitespace to produce a usable list
-  let cows = (cowsay -l | lines | skip 1 | each { split row " " } | flatten | where { |it| $it != "" })
+  let cows = (^cowsay -l | lines | skip 1 | each { split row " " } | flatten | where { |it| $it != "" })
 
   # Randomly pick one cow from the list
   let cow = ($cows | get (random int 0..($cows | length | $in - 1)))
 
   # Generate a fortune, wrap it at 80 chars, and pipe it through the chosen cow
-  fortune | fmt -80 -s | ^$effect $flag -f $cow -n
+  ^fortune | ^fmt -80 -s | ^$effect $flag -f $cow -n
 }
