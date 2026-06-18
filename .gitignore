@@ -19,6 +19,10 @@ tools/vim/.vim/plugged/
 history.txt
 shell/nushell/extra.nu
 
+# K9s
+tools/k9s/clusters/
+
 # Other
 build/
 *.swp
+*.log
