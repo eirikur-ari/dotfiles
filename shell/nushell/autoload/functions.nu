@@ -26,3 +26,16 @@ def localip [] {
     ^ipconfig getifaddr en1
   }
 }
+
+def showports [] {
+  if ($nu.os-info.name == 'macos') {
+    lsof -P -iTCP -sTCP:LISTEN 
+    | lines
+    | skip 1
+    | each { |line| $line 
+    | parse -r '(?P<COMMAND>\S+)\s+(?P<PID>\d+)\s+(?P<USER>\S+)\s+(?P<FD>\S+)\s+(?P<TYPE>\S+)\s+(?P<DEVICE>\S+)\s+(?P<SIZE_OFF>\S+)\s+(?P<NODE>\S+)\s+(?P<NAME>.+)$'}
+    | flatten
+  } else {
+    ^ss -tuln
+  }
+}

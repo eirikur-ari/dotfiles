@@ -94,7 +94,7 @@ case $(uname) in
       man -t "$1" | open -f -a /Applications/preview.app/;
     }
 
-    function showPorts() {
+    function showports() {
       lsof -P -iTCP -sTCP:LISTEN
     }
   ;;
