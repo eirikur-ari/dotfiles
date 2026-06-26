@@ -29,7 +29,7 @@ def localip [] {
 
 def showports [] {
   if ($nu.os-info.name == 'macos') {
-    lsof -P -iTCP -sTCP:LISTEN 
+    ^lsof -P -iTCP -sTCP:LISTEN 
     | lines
     | skip 1
     | each { |line| $line 
